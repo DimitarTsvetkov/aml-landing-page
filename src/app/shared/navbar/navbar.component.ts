@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     this.sidebarVisible = false;
     html.classList.remove("nav-open");
   }
-  sidebarToggle() {
+  sidebarToggle(): void {
     // const toggleButton = this.toggleButton;
     // const body = document.getElementsByTagName('body')[0];
     if (this.sidebarVisible === false) {
@@ -45,12 +45,16 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  isDocumentation() {
+  isDocumentation(): boolean {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee === "/documentation") {
       return true;
     } else {
       return false;
     }
+  }
+
+  goToBottom(): void {
+    window.scrollTo(0, document.body.scrollHeight);
   }
 }
