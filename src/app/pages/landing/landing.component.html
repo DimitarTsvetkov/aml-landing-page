@@ -177,7 +177,7 @@
     </div>
   </div>
   <div class="section section-contact-us text-center">
-    <div class="container">
+    <form class="container" [formGroup]="emailForm" (ngSubmit)="sendEmail()">
       <h2 class="title">Want to work with us?</h2>
       <p class="description">Our friendly team will love to hear from you!</p>
       <div class="row">
@@ -192,6 +192,7 @@
               </span>
             </div>
             <input
+              formControlName="from_name"
               type="text"
               class="form-control"
               placeholder="Name"
@@ -209,6 +210,7 @@
               </span>
             </div>
             <input
+              formControlName="from_email"
               type="text"
               class="form-control"
               placeholder="Email Address"
@@ -218,21 +220,23 @@
           </div>
           <div class="textarea-container">
             <textarea
+              formControlName="message"
               class="form-control"
-              name="name"
+              name="message"
               rows="4"
               cols="80"
               placeholder="Your message goes here"
             ></textarea>
           </div>
-          <div class="send-button">
-            <a href="#pablo" class="btn btn-warning btn-round btn-block btn-lg"
-              >Send Message</a
-            >
-          </div>
+          <button
+            class="btn btn-warning btn-round btn-block btn-lg"
+            type="submit"
+          >
+            Send Message
+          </button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
   <footer class="footer footer-default">
     <div class="container">
