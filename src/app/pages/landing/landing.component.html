@@ -228,16 +228,89 @@
               placeholder="Your message goes here"
             ></textarea>
           </div>
+
+          <div
+            *ngIf="from_name.invalid && (from_name.dirty || from_name.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="from_name.errors?.['required']">Name is required.</div>
+            <div *ngIf="from_name.errors?.['minlength']">
+              Name must be at least 4 characters long.
+            </div>
+          </div>
+          <div
+            *ngIf="
+              from_email.invalid && (from_email.dirty || from_email.touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="from_email.errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="from_email.errors?.['email']">
+              Email must be a valid email address.
+            </div>
+          </div>
+          <div
+            *ngIf="message.invalid && (message.dirty || message.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="message.errors?.['required']">Message is required.</div>
+            <div *ngIf="message.errors?.['minlength']">
+              Name must be at least 10 characters long.
+            </div>
+          </div>
           <button
+            *ngIf="!isLoading; else loadingButton"
+            [ngStyle]="emailForm.invalid ? { 'pointer-events': 'none' } : null"
             class="btn btn-warning btn-round btn-block btn-lg"
             type="submit"
+            [disabled]="emailForm.invalid"
           >
             Send Message
           </button>
+
+          <ng-template #loadingButton>
+            <button
+              class="btn btn-warning btn-round btn-block btn-lg"
+              type="submit"
+              disabled
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Sending...
+            </button>
+          </ng-template>
         </div>
       </div>
     </form>
   </div>
+
+  <ng-template #conformationModal let-c="close">
+    <div class="modal-header">
+      <h5 class="modal-title text-center">Messge has been sent!</h5>
+    </div>
+    <div class="modal-body">
+      Thank you for the interest in our solutions ! Your email has been sent
+      successfully, we will promptly contact you and provide a response to your
+      request.
+    </div>
+    <div class="modal-footer">
+      <div>
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="c('Close click')"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
   <footer class="footer footer-default">
     <div class="container">
       <nav>
